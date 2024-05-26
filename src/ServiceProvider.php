@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Appleton\Messages;
 
+use Appleton\Messages\Events\MessageSent;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 class ServiceProvider extends BaseServiceProvider
@@ -20,5 +22,7 @@ class ServiceProvider extends BaseServiceProvider
         ]);
 
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+
+        Event::listen(MessageSent::class, [Listeners\MessageSentListener::class, 'handle']);
     }
 }

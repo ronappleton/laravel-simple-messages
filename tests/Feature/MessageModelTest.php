@@ -16,18 +16,8 @@ class MessageModelTest extends TestCase
 
     public function testGetSender(): void
     {
-        Schema::create('users', function ($table) {
-            $table->id();
-            $table->timestamps();
-        });
-
-        $userClass = new class extends Model {
-            protected $table = 'users';
-        };
-
-        $sender = $userClass::query()->create();
-
-        $recipient = $userClass::query()->create();
+        $sender = $this->getUserModel();
+        $recipient = $this->getUserModel();
 
         $message = Message::factory()->create([
             'sender_id' => $sender->id,
@@ -41,18 +31,9 @@ class MessageModelTest extends TestCase
 
     public function testGetRecipient(): void
     {
-        Schema::create('users', function ($table) {
-            $table->id();
-            $table->timestamps();
-        });
 
-        $userClass = new class extends Model {
-            protected $table = 'users';
-        };
-
-        $sender = $userClass::query()->create();
-
-        $recipient = $userClass::query()->create();
+        $sender = $this->getUserModel();
+        $recipient = $this->getUserModel();
 
         $message = Message::factory()->create([
             'sender_id' => $sender->id,
@@ -66,18 +47,9 @@ class MessageModelTest extends TestCase
 
     public function testGetUnreadMessages(): void
     {
-        Schema::create('users', function ($table) {
-            $table->id();
-            $table->timestamps();
-        });
 
-        $userClass = new class extends Model {
-            protected $table = 'users';
-        };
-
-        $sender = $userClass::query()->create();
-
-        $recipient = $userClass::query()->create();
+        $sender = $this->getUserModel();
+        $recipient = $this->getUserModel();
 
         $message = Message::factory()->create([
             'sender_id' => $sender->id,
@@ -92,18 +64,8 @@ class MessageModelTest extends TestCase
 
     public function testGetReadMessages(): void
     {
-        Schema::create('users', function ($table) {
-            $table->id();
-            $table->timestamps();
-        });
-
-        $userClass = new class extends Model {
-            protected $table = 'users';
-        };
-
-        $sender = $userClass::query()->create();
-
-        $recipient = $userClass::query()->create();
+        $sender = $this->getUserModel();
+        $recipient = $this->getUserModel();
 
         Message::factory()->create([
             'sender_id' => $sender->id,

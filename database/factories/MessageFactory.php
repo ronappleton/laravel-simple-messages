@@ -17,10 +17,10 @@ class MessageFactory extends Factory
     public function definition(): array
     {
         return [
-            'sender_id' => $this->faker->word(),
-            'sender_type' => $this->faker->word(),
-            'recipient_id' => $this->faker->word(),
-            'recipient_type' => $this->faker->word(),
+            'sender_id' => $this->faker->sentence(),
+            'sender_type' => $this->faker->sentence(),
+            'recipient_id' => $this->faker->sentence(),
+            'recipient_type' => $this->faker->sentence(),
             'sent_at' => null,
             'read_at' => null,
             'notifications' => null,

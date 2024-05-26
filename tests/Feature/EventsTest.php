@@ -24,17 +24,9 @@ class EventsTest extends TestCase
         Event::fake();
 
         $messageService = new MessageService();
-        Schema::create('users', function ($table) {
-            $table->id();
-            $table->timestamps();
-        });
 
-        $userClass = new class extends Model {
-            protected $table = 'users';
-        };
-
-        $sender = $userClass::query()->create();
-        $recipient = $userClass::query()->create();
+        $sender = $this->getUserModel();
+        $recipient = $this->getUserModel();
 
         $messageService->send($recipient, 'Hello, World!', $sender);
 
@@ -48,22 +40,9 @@ class EventsTest extends TestCase
         Event::fake();
 
         $messageService = new MessageService();
-        Schema::create('users', function ($table) {
-            $table->id();
-            $table->timestamps();
-        });
 
-        $userClass = new class extends Model {
-            protected $table = 'users';
-
-            public function messages()
-            {
-                return $this->morphMany(Message::class, 'recipient');
-            }
-        };
-
-        $sender = $userClass::query()->create();
-        $recipient = $userClass::query()->create();
+        $sender = $this->getUserModel();
+        $recipient = $this->getUserModel();
 
         $messageService->send($recipient, 'Hello, World!', $sender);
         $messageService->markRead($recipient->messages->first());
@@ -78,22 +57,9 @@ class EventsTest extends TestCase
         Event::fake();
 
         $messageService = new MessageService();
-        Schema::create('users', function ($table) {
-            $table->id();
-            $table->timestamps();
-        });
 
-        $userClass = new class extends Model {
-            protected $table = 'users';
-
-            public function messages()
-            {
-                return $this->morphMany(Message::class, 'recipient');
-            }
-        };
-
-        $sender = $userClass::query()->create();
-        $recipient = $userClass::query()->create();
+        $sender = $this->getUserModel();
+        $recipient = $this->getUserModel();
 
         $messageService->send($recipient, 'Hello, World!', $sender);
         $messageService->delete($recipient->messages->first());

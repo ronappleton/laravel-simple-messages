@@ -24,5 +24,9 @@ class ServiceProvider extends BaseServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         Event::listen(MessageSent::class, [Listeners\MessageSentListener::class, 'handle']);
+
+        $this->publishes([
+            __DIR__ . '/../database/migrations' => database_path('migrations'),
+        ], 'messages-migrations');
     }
 }
